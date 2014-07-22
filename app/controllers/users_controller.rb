@@ -11,7 +11,11 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
   def new
-    @user = User.new
+    if !signed_in?
+      @user = User.new
+    else
+      redirect_to root_url
+    end
   end
   
   def create
